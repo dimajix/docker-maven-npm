@@ -1,10 +1,35 @@
 version: "3"
 
 services:
-  maven-npm:
+  maven-npm-latest:
     image: dimajix/maven-npm:latest
     build:
+      context: .
+      dockerfile: Dockerfile-jdk11
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+
+  maven-npm-11:
+    image: dimajix/maven-npm:jdk-11
+    build:
       context:  .
+      dockerfile: Dockerfile-jdk11
+      args:
+        http_proxy: ${http_proxy}
+        https_proxy: ${https_proxy}
+    environment:
+      - http_proxy=${http_proxy}
+      - https_proxy=${https_proxy}
+
+  maven-npm-8:
+    image: dimajix/maven-npm:jdk-1.8
+    build:
+      context: .
+      dockerfile: Dockerfile-jdk8
       args:
         http_proxy: ${http_proxy}
         https_proxy: ${https_proxy}
